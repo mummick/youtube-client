@@ -9,6 +9,7 @@ import { FilterComponent } from './filter/filter.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import { SearchItemComponent } from './search-list/search-item/search-item.component';
 import { MaterialModule } from './shared/material/material.module';
+import { AuthComponent } from './header/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MaterialModule } from './shared/material/material.module';
     FilterComponent,
     SearchListComponent,
     SearchItemComponent,
+    AuthComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule],
   providers: [],
