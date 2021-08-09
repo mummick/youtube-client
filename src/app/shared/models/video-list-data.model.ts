@@ -1,8 +1,8 @@
 import { VideoItemData } from './video-item-data.model';
 
 export interface PageInfo {
-  totalResults: string;
-  resultsPerPage: string;
+  totalResults: number;
+  resultsPerPage: number;
 }
 export interface VideoListData {
   kind: string;

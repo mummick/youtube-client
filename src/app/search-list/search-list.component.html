@@ -1,4 +1,5 @@
-<p>search-list works!</p>
-<div *ngFor="let item of items">
-  <app-search-item [val]="item"></app-search-item>
+<div *ngIf="videoListData" class="search-list">
+  <div *ngFor="let item of videoListData.items">
+    <app-search-item [videoItemData]="item"></app-search-item>
+  </div>
 </div>

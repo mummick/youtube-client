@@ -7,14 +7,18 @@ import { HeaderComponent } from './header/header.component';
 import { FilterComponent } from './filter/filter.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import { SearchItemComponent } from './search-list/search-item/search-item.component';
-// import { HeaderModule } from './header/header.module';
-// import { SearchModule } from './search/search.module';
-// import { CardListModule } from './card-list/card-list.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './shared/material/material.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FilterComponent, SearchListComponent, SearchItemComponent],
-  // imports: [BrowserModule, AppRoutingModule, HeaderModule, SearchModule, CardListModule],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FilterComponent,
+    SearchListComponent,
+    SearchItemComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule],
   providers: [],
   bootstrap: [AppComponent],
 })

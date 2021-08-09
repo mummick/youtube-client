@@ -1,7 +1,7 @@
 export interface Thumbnail {
   url: string;
-  width: string;
-  height: string;
+  width: number;
+  height: number;
 }
 type ThumbnailType = 'default' | 'medium' | 'high' | 'standard' | 'maxres';
 export type Thumbnails = Record<ThumbnailType, Thumbnail>;

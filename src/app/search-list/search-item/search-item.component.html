@@ -1,2 +1,32 @@
-<p>search-item works!</p>
-<p>{{ val }}</p>
+<mat-card class="search-item" *ngIf="videoItemData" [ngStyle]="{ 'border-color': borderColor }">
+  <mat-card-content>
+    <img
+      class="search-item__preview"
+      [src]="videoItemData.snippet.thumbnails.medium.url"
+      [alt]="videoItemData.snippet.title"
+    />
+    <div class="search-item__stat">
+      <div class="search-item__stat-item">
+        <img src="./assets/images/svg/viewed.svg" alt="" class="search-item__stat-icon" />
+        <div class="search-item__stat-text">{{ videoItemData.statistics.viewCount }}</div>
+      </div>
+      <div class="search-item__stat-item">
+        <img src="./assets/images/svg/liked.svg" alt="" class="search-item__stat-icon" />
+        <div class="search-item__stat-text">{{ videoItemData.statistics.likeCount }}</div>
+      </div>
+      <div class="search-item__stat-item">
+        <img src="./assets/images/svg/dislike.svg" alt="" class="search-item__stat-icon" />
+        <div class="search-item__stat-text">{{ videoItemData.statistics.dislikeCount }}</div>
+      </div>
+      <div class="search-item__stat-item">
+        <img src="./assets/images/svg/comments.svg" alt="" class="search-item__stat-icon" />
+        <div class="search-item__stat-text">{{ videoItemData.statistics.commentCount }}</div>
+      </div>
+    </div>
+    <div class="search-item__name">{{ videoItemData.snippet.title }}</div>
+  </mat-card-content>
+  <mat-card-footer>
+    <button mat-raised-button color="primary" class="search-item__button">more...</button>
+    <div class="search-item__date"></div>
+  </mat-card-footer>
+</mat-card>
