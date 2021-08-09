@@ -9,7 +9,6 @@ import { VideoListData } from '../shared/models/video-list-data.model';
 })
 export class SearchListComponent implements OnInit {
   @Input() videoListData: VideoListData | undefined;
-  constructor() {}
 
   ngOnInit(): void {
     const mock = new Mock();

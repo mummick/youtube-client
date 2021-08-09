@@ -1,9 +1,8 @@
-import { VideoItemData } from './models/video-item-data.model';
 import { VideoListData } from './models/video-list-data.model';
 
 export class Mock {
   public videoList: VideoListData;
-  public videoItem: VideoItemData;
+
   constructor() {
     this.videoList = {
       kind: 'youtube#videoListResponse',
@@ -772,6 +771,5 @@ export class Mock {
         },
       ],
     };
-    this.videoItem = this.videoList.items[0];
   }
 }

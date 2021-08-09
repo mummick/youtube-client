@@ -8,8 +8,8 @@ import { VideoItemData } from 'src/app/shared/models/video-item-data.model';
 })
 export class SearchItemComponent implements OnInit {
   @Input() videoItemData: VideoItemData | undefined;
+
   public borderColor: string = '';
-  constructor() {}
 
   ngOnInit(): void {
     this.borderColor = this.getBorderColor();
@@ -23,13 +23,14 @@ export class SearchItemComponent implements OnInit {
       const dateDiffDays = (currentDate - publicationDate) / msInDay;
       if (dateDiffDays > 365 / 2) {
         return '#EB5757';
-      } else if (dateDiffDays > 30) {
-        return '#F2C94C';
-      } else if (dateDiffDays > 7) {
-        return '#27AE60';
-      } else {
-        return '#2F80ED';
       }
+      if (dateDiffDays > 30) {
+        return '#F2C94C';
+      }
+      if (dateDiffDays > 7) {
+        return '#27AE60';
+      }
+      return '#2F80ED';
     }
     return '#4f4f4f';
   }
