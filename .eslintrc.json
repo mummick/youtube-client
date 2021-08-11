@@ -30,6 +30,7 @@
         "@angular-eslint/no-empty-lifecycle-method": "off",
         "class-methods-use-this": "off",
         // 'lines-between-class-members': 'off',
+        "validateLineBreaks": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {
