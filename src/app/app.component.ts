@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Mock } from './shared/mock';
+import { VideoListData } from './shared/models/video-list-data.model';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,15 @@ export default class AppComponent {
 
   public isFilter = false;
 
+  public videoListData?: VideoListData;
+
   toggleFilter() {
     this.isFilter = !this.isFilter;
+  }
+
+  search(query: string) {
+    // console.log('Search: ' + query);
+    const mock = new Mock();
+    this.videoListData = query === '' ? undefined : mock.videoList;
   }
 }

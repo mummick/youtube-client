@@ -1,3 +1,3 @@
-<app-header (filterButtonClick)="toggleFilter()"></app-header>
+<app-header (filterButtonClick)="toggleFilter()" (searchQuery)="search($event)"></app-header>
 <app-filter *ngIf="isFilter"></app-filter>
-<app-search-list> </app-search-list>
+<app-search-list [videoListData]="videoListData"> </app-search-list>

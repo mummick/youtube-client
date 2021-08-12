@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,7 +21,7 @@ import { AuthComponent } from './header/auth/auth.component';
     SearchItemComponent,
     AuthComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
