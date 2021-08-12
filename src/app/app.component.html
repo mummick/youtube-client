@@ -1,2 +1,3 @@
-<app-header></app-header> <app-filter></app-filter>
+<app-header (filterButtonClick)="toggleFilter()"></app-header>
+<app-filter *ngIf="isFilter"></app-filter>
 <app-search-list> </app-search-list>

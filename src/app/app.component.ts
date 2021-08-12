@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export default class AppComponent {
-  title = 'youtube-client';
+  public title = 'youtube-client';
+
+  public isFilter = false;
+
+  toggleFilter() {
+    this.isFilter = !this.isFilter;
+  }
 }
