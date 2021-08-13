@@ -11,6 +11,7 @@ import { SearchListComponent } from './search-list/search-list.component';
 import { SearchItemComponent } from './search-list/search-item/search-item.component';
 import { MaterialModule } from './shared/material/material.module';
 import { AuthComponent } from './header/auth/auth.component';
+import { BorderColorByDateDirective } from './search-list/border-color-by-date.directive';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AuthComponent } from './header/auth/auth.component';
     SearchListComponent,
     SearchItemComponent,
     AuthComponent,
+    BorderColorByDateDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule, FormsModule],
   providers: [],

@@ -1,4 +1,8 @@
-<mat-card class="search-item" *ngIf="videoItemData" [ngStyle]="{ 'border-color': borderColor }">
+<mat-card
+  class="search-item"
+  *ngIf="videoItemData"
+  [appBorderColorByDate]="videoItemData.snippet.publishedAt"
+>
   <mat-card-content>
     <img
       class="search-item__preview"
