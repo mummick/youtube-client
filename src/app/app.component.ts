@@ -14,13 +14,22 @@ export default class AppComponent {
 
   public videoListData?: VideoListData;
 
+  public filterByName?: string;
+
   toggleFilter() {
     this.isFilter = !this.isFilter;
+    if (!this.isFilter) {
+      this.filterByName = undefined;
+    }
   }
 
   search(query: string) {
     // console.log('Search: ' + query);
     const mock = new Mock();
     this.videoListData = query === '' ? undefined : mock.videoList;
+  }
+
+  filterByNameChange(filter: string) {
+    this.filterByName = filter;
   }
 }

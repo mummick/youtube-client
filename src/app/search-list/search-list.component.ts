@@ -8,4 +8,6 @@ import { VideoListData } from '../shared/models/video-list-data.model';
 })
 export class SearchListComponent {
   @Input() videoListData?: VideoListData;
+
+  @Input() filterByName?: string;
 }
