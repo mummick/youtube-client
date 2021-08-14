@@ -13,6 +13,7 @@ import { MaterialModule } from './shared/material/material.module';
 import { AuthComponent } from './header/auth/auth.component';
 import { BorderColorByDateDirective } from './search-list/border-color-by-date.directive';
 import { FilterByNamePipe } from './search-list/filter-by-name.pipe';
+import { SortByParamsPipe } from './search-list/sort-by-params.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FilterByNamePipe } from './search-list/filter-by-name.pipe';
     AuthComponent,
     BorderColorByDateDirective,
     FilterByNamePipe,
+    SortByParamsPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule, FormsModule],
   providers: [],

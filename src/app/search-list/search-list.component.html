@@ -1,5 +1,9 @@
 <div *ngIf="videoListData" class="search-list">
-  <div *ngFor="let item of videoListData.items | filterByName: filterByName">
+  <div
+    *ngFor="
+      let item of videoListData.items | sortByParams: sortByParams | filterByName: filterByName
+    "
+  >
     <app-search-item [videoItemData]="item"></app-search-item>
   </div>
 </div>
