@@ -1,0 +1,13 @@
+.auth {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  &__name {
+    font-size: 12px;
+    line-height: 14px;
+    text-align: right;
+    color: #4f4f4f;
+  }
+}

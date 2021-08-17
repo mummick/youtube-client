@@ -1,0 +1,19 @@
+<div class="header">
+  <div></div>
+  <div class="header__search-panel">
+    <img src="./assets/images/svg/logo.svg" alt="logo" class="header__logo" />
+    <form class="header__form">
+      <input
+        [(ngModel)]="searchInput"
+        name="searchQuery"
+        placeholder="What are you want to find out?"
+        class="header__input"
+      />
+      <button type="button" class="header__search-button" (click)="search()">search</button>
+    </form>
+    <button class="header__options-button" (click)="toggleFilter()">
+      <img src="./assets/images/svg/settings.svg" alt="options" />
+    </button>
+  </div>
+  <app-auth></app-auth>
+</div>

@@ -27,8 +27,9 @@
       "rules": {
         // 'import/no-unresolved': 'off',
         "import/prefer-default-export": "off",
-        "@angular-eslint/no-empty-lifecycle-method": "off",
+        // "@angular-eslint/no-empty-lifecycle-method": "off",
         "class-methods-use-this": "off",
+        // "no-console": "off",
         // 'lines-between-class-members': 'off',
         "validateLineBreaks": "off",
         "@angular-eslint/directive-selector": [
