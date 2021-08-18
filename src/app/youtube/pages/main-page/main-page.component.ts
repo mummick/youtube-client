@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Mock } from '../../mock/mock';
 import { SortParams } from '../../models/sort-params.model';
 import { VideoListData } from '../../models/video-list-data.model';
+import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange.service';
 
 @Component({
   selector: 'app-main-page',
@@ -18,7 +18,10 @@ export class MainPageComponent implements OnInit {
 
   public sortByParams?: SortParams;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private youtubeDataExchange: YoutubeDataExchangeService,
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -36,8 +39,7 @@ export class MainPageComponent implements OnInit {
   }
 
   private search(query: string | null) {
-    const mock = new Mock();
-    return query ? mock.videoList : undefined;
+    return query ? this.youtubeDataExchange.getVideoItems(query) : undefined;
   }
 
   filterByNameChange(filter: string) {
