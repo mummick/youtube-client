@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { SortParams } from '../shared/models/sort-params.model';
-import { VideoListData } from '../shared/models/video-list-data.model';
+import { SortParams } from 'src/app/shared/models/sort-params.model';
+import { VideoListData } from 'src/app/shared/models/video-list-data.model';
 
 @Component({
   selector: 'app-search-list',

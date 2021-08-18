@@ -5,29 +5,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FilterComponent } from './filter/filter.component';
-import { SearchListComponent } from './search-list/search-list.component';
-import { SearchItemComponent } from './search-list/search-item/search-item.component';
 import { MaterialModule } from './shared/material/material.module';
 import { AuthComponent } from './header/auth/auth.component';
-import { BorderColorByDateDirective } from './search-list/border-color-by-date.directive';
-import { FilterByNamePipe } from './search-list/filter-by-name.pipe';
-import { SortByParamsPipe } from './search-list/sort-by-params.pipe';
+import { CoreModule } from './core/core.module';
+import { YoutubeModule } from './youtube/youtube.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FilterComponent,
-    SearchListComponent,
-    SearchItemComponent,
-    AuthComponent,
-    BorderColorByDateDirective,
-    FilterByNamePipe,
-    SortByParamsPipe,
+  declarations: [AppComponent, AuthComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule,
+    CoreModule,
+    YoutubeModule,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

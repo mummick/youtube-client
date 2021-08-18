@@ -1,13 +1,3 @@
-<app-header (filterButtonClick)="toggleFilter()" (searchQuery)="search($event)"></app-header>
-<app-filter
-  *ngIf="isFilter"
-  (filterByNameEmit)="filterByNameChange($event)"
-  (sortByParamsEmit)="sortByParamsChange($event)"
-></app-filter>
-<app-search-list
-  [videoListData]="videoListData"
-  [filterByName]="filterByName"
-  [sortByParams]="sortByParams"
->
-</app-search-list>
+<!-- <app-header (filterButtonClick)="toggleFilter()" (searchQuery)="search($event)"></app-header> -->
+<app-header></app-header>
 <router-outlet></router-outlet>
