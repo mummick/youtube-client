@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Mock } from 'src/app/shared/mock';
-import { SortParams } from 'src/app/shared/models/sort-params.model';
-import { VideoListData } from 'src/app/shared/models/video-list-data.model';
+import { Mock } from '../../mock/mock';
+import { SortParams } from '../../models/sort-params.model';
+import { VideoListData } from '../../models/video-list-data.model';
 
 @Component({
   selector: 'app-main-page',

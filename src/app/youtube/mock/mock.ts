@@ -1,4 +1,4 @@
-import { VideoListData } from './models/video-list-data.model';
+import { VideoListData } from '../models/video-list-data.model';
 
 export class Mock {
   public videoList: VideoListData;

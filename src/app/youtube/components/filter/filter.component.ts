@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { SortDirection } from 'src/app/shared/models/sort-direction.model';
-import { SortParams } from 'src/app/shared/models/sort-params.model';
-import { SortType } from 'src/app/shared/models/sort-type.model';
+import { SortDirection } from '../../models/sort-direction.model';
+import { SortParams } from '../../models/sort-params.model';
+import { SortType } from '../../models/sort-type.model';
 
 @Component({
   selector: 'app-filter',

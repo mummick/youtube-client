@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SortDirection } from 'src/app/shared/models/sort-direction.model';
-import { SortParams } from 'src/app/shared/models/sort-params.model';
-import { SortType } from 'src/app/shared/models/sort-type.model';
-import { VideoItemData } from 'src/app/shared/models/video-item-data.model';
+import { SortDirection } from '../models/sort-direction.model';
+import { SortParams } from '../models/sort-params.model';
+import { SortType } from '../models/sort-type.model';
+import { VideoItemData } from '../models/video-item-data.model';
 
 @Pipe({
   name: 'sortByParams',
