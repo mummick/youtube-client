@@ -1,0 +1,18 @@
+<div class="stat" *ngIf="statistics">
+  <div class="stat-item">
+    <img src="./assets/images/svg/viewed.svg" alt="" class="stat-icon" />
+    <div class="stat-text">{{ statistics.viewCount }}</div>
+  </div>
+  <div class="stat-item">
+    <img src="./assets/images/svg/liked.svg" alt="" class="stat-icon" />
+    <div class="stat-text">{{ statistics.likeCount }}</div>
+  </div>
+  <div class="stat-item">
+    <img src="./assets/images/svg/dislike.svg" alt="" class="stat-icon" />
+    <div class="stat-text">{{ statistics.dislikeCount }}</div>
+  </div>
+  <div class="stat-item">
+    <img src="./assets/images/svg/comments.svg" alt="" class="stat-icon" />
+    <div class="stat-text">{{ statistics.commentCount }}</div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { SortByParamsPipe } from './pipes/sort-by-params.pipe';
 import { SearchItemComponent } from './components/search-item/search-item.component';
 import { SharedModule } from '../shared/shared.module';
 import { BorderColorByDateDirective } from './directives/border-color-by-date.directive';
+import { StatViewComponent } from './components/stat-view/stat-view.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BorderColorByDateDirective } from './directives/border-color-by-date.di
     SortByParamsPipe,
     SearchItemComponent,
     BorderColorByDateDirective,
+    StatViewComponent,
   ],
   imports: [CommonModule, FormsModule, SharedModule],
   exports: [MainPageComponent],

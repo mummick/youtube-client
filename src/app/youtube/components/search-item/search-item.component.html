@@ -9,24 +9,7 @@
       [src]="videoItemData.snippet.thumbnails.medium.url"
       [alt]="videoItemData.snippet.title"
     />
-    <div class="search-item__stat">
-      <div class="search-item__stat-item">
-        <img src="./assets/images/svg/viewed.svg" alt="" class="search-item__stat-icon" />
-        <div class="search-item__stat-text">{{ videoItemData.statistics.viewCount }}</div>
-      </div>
-      <div class="search-item__stat-item">
-        <img src="./assets/images/svg/liked.svg" alt="" class="search-item__stat-icon" />
-        <div class="search-item__stat-text">{{ videoItemData.statistics.likeCount }}</div>
-      </div>
-      <div class="search-item__stat-item">
-        <img src="./assets/images/svg/dislike.svg" alt="" class="search-item__stat-icon" />
-        <div class="search-item__stat-text">{{ videoItemData.statistics.dislikeCount }}</div>
-      </div>
-      <div class="search-item__stat-item">
-        <img src="./assets/images/svg/comments.svg" alt="" class="search-item__stat-icon" />
-        <div class="search-item__stat-text">{{ videoItemData.statistics.commentCount }}</div>
-      </div>
-    </div>
+    <app-stat-view [statistics]="videoItemData.statistics"></app-stat-view>
     <div class="search-item__name">{{ videoItemData.snippet.title }}</div>
   </mat-card-content>
   <mat-card-footer>
