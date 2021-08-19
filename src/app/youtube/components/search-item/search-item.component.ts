@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { VideoItemData } from '../../models/video-item-data.model';
 
 @Component({
@@ -8,4 +9,12 @@ import { VideoItemData } from '../../models/video-item-data.model';
 })
 export class SearchItemComponent {
   @Input() videoItemData: VideoItemData | undefined;
+
+  constructor(private router: Router) {}
+
+  getDetailedInfo() {
+    if (this.videoItemData) {
+      this.router.navigate(['/detailed', this.videoItemData.id]);
+    }
+  }
 }

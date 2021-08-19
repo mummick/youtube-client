@@ -10,6 +10,7 @@ import { SearchItemComponent } from './components/search-item/search-item.compon
 import { SharedModule } from '../shared/shared.module';
 import { BorderColorByDateDirective } from './directives/border-color-by-date.directive';
 import { StatViewComponent } from './components/stat-view/stat-view.component';
+import { DetailedPageComponent } from './pages/detailed-page/detailed-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { StatViewComponent } from './components/stat-view/stat-view.component';
     SearchItemComponent,
     BorderColorByDateDirective,
     StatViewComponent,
+    DetailedPageComponent,
   ],
   imports: [CommonModule, FormsModule, SharedModule],
   exports: [MainPageComponent],
