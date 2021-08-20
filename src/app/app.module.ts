@@ -6,12 +6,12 @@ import { FormsModule } from '@angular/forms';
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
 import { MaterialModule } from './shared/material/material.module';
-import { AuthComponent } from './header/auth/auth.component';
+import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { YoutubeModule } from './youtube/youtube.module';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,6 +20,7 @@ import { YoutubeModule } from './youtube/youtube.module';
     FormsModule,
     CoreModule,
     YoutubeModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
