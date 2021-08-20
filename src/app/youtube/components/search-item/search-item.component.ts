@@ -14,7 +14,7 @@ export class SearchItemComponent {
 
   getDetailedInfo() {
     if (this.videoItemData) {
-      this.router.navigate(['/detailed', this.videoItemData.id]);
+      this.router.navigate(['/youtube/detailed', this.videoItemData.id]);
     }
   }
 }

@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BorderColorByDateDirective } from './directives/border-color-by-date.directive';
 import { StatViewComponent } from './components/stat-view/stat-view.component';
 import { DetailedPageComponent } from './pages/detailed-page/detailed-page.component';
+import { YoutubeRoutingModule } from './youtube-routing.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { DetailedPageComponent } from './pages/detailed-page/detailed-page.compo
     StatViewComponent,
     DetailedPageComponent,
   ],
-  imports: [CommonModule, FormsModule, SharedModule],
+  imports: [CommonModule, FormsModule, SharedModule, YoutubeRoutingModule],
   exports: [MainPageComponent],
 })
 export class YoutubeModule {}

@@ -6,9 +6,7 @@ import { FormsModule } from '@angular/forms';
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
 import { MaterialModule } from './shared/material/material.module';
-import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
-import { YoutubeModule } from './youtube/youtube.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,8 +17,6 @@ import { YoutubeModule } from './youtube/youtube.module';
     MaterialModule,
     FormsModule,
     CoreModule,
-    YoutubeModule,
-    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -23,6 +23,6 @@ export class HeaderComponent {
   }
 
   private sendParams() {
-    this.router.navigate(['/search', this.searchInput, this.isFilter]);
+    this.router.navigate(['/youtube/search', this.searchInput, this.isFilter]);
   }
 }
