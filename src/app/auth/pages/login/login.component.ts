@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthServiceService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -10,5 +12,10 @@ export class LoginComponent {
 
   public password: string = '';
 
-  onLogin() {}
+  constructor(private authService: AuthServiceService, private router: Router) {}
+
+  onLoginClick() {
+    this.authService.login(this.user, this.password);
+    this.router.navigate(['/']);
+  }
 }
