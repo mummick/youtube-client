@@ -39,7 +39,7 @@ export class MainPageComponent implements OnInit {
   }
 
   private search(query: string | null) {
-    return query ? this.youtubeDataExchange.getVideoItems(query) : undefined;
+    return query !== null ? this.youtubeDataExchange.getVideoItems(query) : undefined;
   }
 
   filterByNameChange(filter: string) {
