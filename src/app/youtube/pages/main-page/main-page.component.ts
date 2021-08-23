@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { OptionsService } from 'src/app/core/services/options.service';
 import { SortParams } from '../../models/sort-params.model';
 import { VideoListData } from '../../models/video-list-data.model';
 import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange.service';
@@ -21,17 +22,20 @@ export class MainPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private youtubeDataExchange: YoutubeDataExchangeService,
+    private optionsService: OptionsService,
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.videoListData = this.search(params.query);
-      this.toggleFilter(params.isFilter);
+    });
+    this.optionsService.isFilter$.subscribe((isFilter) => {
+      this.toggleFilter(isFilter);
     });
   }
 
-  toggleFilter(isFilter: string) {
-    this.isFilter = isFilter === 'true';
+  toggleFilter(isFilter: boolean) {
+    this.isFilter = isFilter;
     if (!this.isFilter) {
       this.filterByName = undefined;
       this.sortByParams = undefined;

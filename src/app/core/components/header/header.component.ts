@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { OptionsService } from '../../services/options.service';
 
 @Component({
   selector: 'app-header',
@@ -9,20 +10,13 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   public searchInput: string = '';
 
-  private isFilter = false;
-
-  constructor(private router: Router) {}
+  constructor(private optionsService: OptionsService, private router: Router) {}
 
   toggleFilter() {
-    this.isFilter = !this.isFilter;
-    this.sendParams();
+    this.optionsService.toggleFilter();
   }
 
   search() {
-    this.sendParams();
-  }
-
-  private sendParams() {
-    this.router.navigate(['/youtube/search', this.searchInput, this.isFilter]);
+    this.router.navigate(['/youtube/search', this.searchInput]);
   }
 }

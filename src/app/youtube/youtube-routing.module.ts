@@ -5,7 +5,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 
 const routes: Routes = [
   {
-    path: 'search/:query/:isFilter',
+    path: 'search/:query',
     component: MainPageComponent,
   },
   {
