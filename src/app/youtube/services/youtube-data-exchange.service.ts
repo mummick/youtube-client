@@ -9,6 +9,7 @@ import { VideoListData } from '../models/video-list-data.model';
 export class YoutubeDataExchangeService {
   /* eslint-disable-next-line */
   getVideoItems(query: string): VideoListData {
+    // console.log('Query', query);
     const mock = new Mock();
     return mock.videoList;
   }
