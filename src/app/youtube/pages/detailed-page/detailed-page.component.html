@@ -3,7 +3,13 @@
   <div class="detailed__img-wrap">
     <img
       class="detailed__img"
-      [src]="videoItemData.snippet.thumbnails.maxres.url"
+      [src]="
+        videoItemData.snippet.thumbnails.maxres
+          ? videoItemData.snippet.thumbnails.maxres.url
+          : videoItemData.snippet.thumbnails.high
+          ? videoItemData.snippet.thumbnails.high.url
+          : videoItemData.snippet.thumbnails.default?.url
+      "
       [alt]="videoItemData.snippet.title"
     />
   </div>

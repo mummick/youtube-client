@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
 import { VideoItemData } from '../../models/video-item-data.model';
 import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange.service';
 
@@ -10,6 +11,8 @@ import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange
   styleUrls: ['./detailed-page.component.scss'],
 })
 export class DetailedPageComponent implements OnInit {
+  private videoItemData$?: Observable<VideoItemData>;
+
   public videoItemData?: VideoItemData;
 
   public publishedAt?: Date;
@@ -23,13 +26,13 @@ export class DetailedPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.videoItemData = this.search(params.id);
-      if (!this.videoItemData) {
-        this.router.navigate(['/404']);
-      }
-      this.publishedAt = this.videoItemData?.snippet.publishedAt
-        ? new Date(this.videoItemData?.snippet.publishedAt)
-        : undefined;
+      this.videoItemData$ = this.search(params.id);
+      this.videoItemData$?.subscribe((videoItemData) => {
+        this.publishedAt = videoItemData.snippet.publishedAt
+          ? new Date(videoItemData.snippet.publishedAt)
+          : undefined;
+        this.videoItemData = videoItemData;
+      });
     });
   }
 

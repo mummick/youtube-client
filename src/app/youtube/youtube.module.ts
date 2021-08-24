@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './components/filter/filter.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { SearchListComponent } from './components/search-list/search-list.component';
@@ -25,7 +26,7 @@ import { YoutubeRoutingModule } from './youtube-routing.module';
     StatViewComponent,
     DetailedPageComponent,
   ],
-  imports: [CommonModule, FormsModule, SharedModule, YoutubeRoutingModule],
+  imports: [CommonModule, FormsModule, SharedModule, YoutubeRoutingModule, HttpClientModule],
   exports: [MainPageComponent],
 })
 export class YoutubeModule {}

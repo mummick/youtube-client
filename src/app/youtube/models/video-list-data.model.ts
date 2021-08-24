@@ -1,4 +1,4 @@
-import { VideoItemData } from './video-item-data.model';
+import { VideoItemData, VideoItemSearchData } from './video-item-data.model';
 
 export interface PageInfo {
   totalResults: number;
@@ -9,4 +9,11 @@ export interface VideoListData {
   etag: string;
   pageInfo: PageInfo;
   items: VideoItemData[];
+}
+
+export interface VideoListSearchData {
+  kind: string;
+  etag: string;
+  pageInfo: PageInfo;
+  items: VideoItemSearchData[];
 }

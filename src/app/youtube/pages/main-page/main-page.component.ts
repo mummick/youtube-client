@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { OptionsService } from 'src/app/core/services/options.service';
 import { SortParams } from '../../models/sort-params.model';
 import { VideoListData } from '../../models/video-list-data.model';
@@ -12,6 +13,8 @@ import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange
 })
 export class MainPageComponent implements OnInit {
   public isFilter = false;
+
+  private videoListData$?: Observable<VideoListData>;
 
   public videoListData?: VideoListData;
 
@@ -27,7 +30,8 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.videoListData = this.search(params.query);
+      this.videoListData$ = this.search(params.query);
+      this.videoListData$?.subscribe((videoListData) => this.setVideoListData(videoListData));
     });
     this.optionsService.isFilter$.subscribe((isFilter) => {
       this.toggleFilter(isFilter);
@@ -40,6 +44,10 @@ export class MainPageComponent implements OnInit {
       this.filterByName = undefined;
       this.sortByParams = undefined;
     }
+  }
+
+  setVideoListData(videoListData: VideoListData) {
+    this.videoListData = videoListData;
   }
 
   private search(query: string | null) {
