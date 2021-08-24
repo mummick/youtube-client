@@ -9,13 +9,11 @@ import { VideoListData, VideoListSearchData } from '../models/video-list-data.mo
   providedIn: 'any',
 })
 export class YoutubeDataExchangeService {
-  private API_KEY = 'AIzaSyA6AujVbrHG9TWO8V6OKcUBpab5A8vv7Cc';
-
   private MAX_RESULTS = '10';
 
-  private URL_LIST_PRE = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=${this.MAX_RESULTS}&q=`;
+  private URL_LIST_PRE = `search?type=video&part=snippet&maxResults=${this.MAX_RESULTS}&q=`;
 
-  private URL_LIST_FULL = `https://www.googleapis.com/youtube/v3/videos?key=${this.API_KEY}&part=snippet,statistics&id=`;
+  private URL_LIST_FULL = `videos?part=snippet,statistics&id=`;
 
   constructor(private http: HttpClient) {}
 
