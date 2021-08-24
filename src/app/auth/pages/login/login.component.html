@@ -1,0 +1,16 @@
+<div class="login">
+  <div class="login__header">Login</div>
+  <form class="login__form">
+    <label for="user" class="login__label">user</label>
+    <input [(ngModel)]="user" type="text" name="user" placeholder="User" class="login__input" />
+    <label for="password" class="login__label">password</label>
+    <input
+      [(ngModel)]="password"
+      name="password"
+      type="password"
+      placeholder="Password"
+      class="login__input"
+    />
+    <button type="button" class="login__button" (click)="onLoginClick()">Login</button>
+  </form>
+</div>

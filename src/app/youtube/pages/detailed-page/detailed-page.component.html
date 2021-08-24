@@ -1,0 +1,23 @@
+<div class="detailed" *ngIf="videoItemData">
+  <button class="detailed__button" (click)="goBack()">&lt;</button>
+  <div class="detailed__img-wrap">
+    <img
+      class="detailed__img"
+      [src]="videoItemData.snippet.thumbnails.maxres.url"
+      [alt]="videoItemData.snippet.title"
+    />
+  </div>
+  <div class="detailed__description" [appBorderColorByDate]="videoItemData.snippet.publishedAt">
+    <div class="detailed__header">
+      <div class="detailed__header-name">{{ videoItemData.snippet.title }}</div>
+      <div class="detailed__header-date" *ngIf="publishedAt">
+        {{ publishedAt | date: 'EEEE, MMMM d, y' }}
+      </div>
+    </div>
+    <div class="detailed__description-text">
+      <b>Description:</b> <br />
+      {{ videoItemData.snippet.description }}
+    </div>
+    <app-stat-view [statistics]="videoItemData.statistics"></app-stat-view>
+  </div>
+</div>
