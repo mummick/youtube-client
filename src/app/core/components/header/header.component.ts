@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, skipWhile } from 'rxjs/operators';
 import { OptionsService } from '../../services/options.service';
 
@@ -9,7 +9,9 @@ import { OptionsService } from '../../services/options.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  private querySubscription?: Subscription;
+
   private query = new Subject<string>();
 
   private queryOutput$!: Observable<string>;
@@ -21,7 +23,11 @@ export class HeaderComponent implements OnInit {
       debounceTime(1000),
       skipWhile((query) => query.length < 3),
     );
-    this.queryOutput$.subscribe((query) => this.search(query));
+    this.querySubscription = this.queryOutput$.subscribe((query) => this.search(query));
+  }
+
+  ngOnDestroy() {
+    this.querySubscription?.unsubscribe();
   }
 
   toggleFilter() {

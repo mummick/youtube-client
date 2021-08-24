@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { OptionsService } from 'src/app/core/services/options.service';
 import { SortParams } from '../../models/sort-params.model';
 import { VideoListData } from '../../models/video-list-data.model';
@@ -11,7 +11,13 @@ import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit, OnDestroy {
+  private paramsSubscription?: Subscription;
+
+  private searchSubscription?: Subscription;
+
+  private optionsSubscription?: Subscription;
+
   public isFilter = false;
 
   private videoListData$?: Observable<VideoListData>;
@@ -29,13 +35,24 @@ export class MainPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
+    this.paramsSubscription = this.route.params.subscribe((params) => {
       this.videoListData$ = this.search(params.query);
-      this.videoListData$?.subscribe((videoListData) => this.setVideoListData(videoListData));
+      if (this.videoListData$) {
+        this.searchSubscription?.unsubscribe();
+        this.searchSubscription = this.videoListData$.subscribe((videoListData) =>
+          this.setVideoListData(videoListData),
+        );
+      }
     });
-    this.optionsService.isFilter$.subscribe((isFilter) => {
+    this.optionsSubscription = this.optionsService.isFilter$.subscribe((isFilter) => {
       this.toggleFilter(isFilter);
     });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubscription?.unsubscribe();
+    this.searchSubscription?.unsubscribe();
+    this.optionsSubscription?.unsubscribe();
   }
 
   toggleFilter(isFilter: boolean) {

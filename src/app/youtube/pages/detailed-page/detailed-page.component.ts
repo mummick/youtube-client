@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { VideoItemData } from '../../models/video-item-data.model';
 import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange.service';
 
@@ -10,7 +10,11 @@ import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange
   templateUrl: './detailed-page.component.html',
   styleUrls: ['./detailed-page.component.scss'],
 })
-export class DetailedPageComponent implements OnInit {
+export class DetailedPageComponent implements OnInit, OnDestroy {
+  private paramsSubscription?: Subscription;
+
+  private searchSubscription?: Subscription;
+
   private videoItemData$?: Observable<VideoItemData>;
 
   public videoItemData?: VideoItemData;
@@ -25,15 +29,23 @@ export class DetailedPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.paramsSubscription = this.route.params.subscribe((params) => {
       this.videoItemData$ = this.search(params.id);
-      this.videoItemData$?.subscribe((videoItemData) => {
-        this.publishedAt = videoItemData.snippet.publishedAt
-          ? new Date(videoItemData.snippet.publishedAt)
-          : undefined;
-        this.videoItemData = videoItemData;
-      });
+      if (this.videoItemData$) {
+        this.searchSubscription?.unsubscribe();
+        this.searchSubscription = this.videoItemData$.subscribe((videoItemData) => {
+          this.publishedAt = videoItemData.snippet.publishedAt
+            ? new Date(videoItemData.snippet.publishedAt)
+            : undefined;
+          this.videoItemData = videoItemData;
+        });
+      }
     });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubscription?.unsubscribe();
+    this.searchSubscription?.unsubscribe();
   }
 
   private search(id: string | null) {
