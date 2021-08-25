@@ -34,9 +34,7 @@ export class DetailedPageComponent implements OnInit, OnDestroy {
       if (this.videoItemData$) {
         this.searchSubscription?.unsubscribe();
         this.searchSubscription = this.videoItemData$.subscribe((videoItemData) => {
-          this.publishedAt = videoItemData.snippet.publishedAt
-            ? new Date(videoItemData.snippet.publishedAt)
-            : undefined;
+          this.publishedAt = new Date(videoItemData.snippet.publishedAt);
           this.videoItemData = videoItemData;
         });
       }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, skipWhile } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 import { OptionsService } from '../../services/options.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.queryOutput$ = this.query.pipe(
       debounceTime(1000),
-      skipWhile((query) => query.length < 3),
+      filter((query) => query.length >= 3),
     );
     this.querySubscription = this.queryOutput$.subscribe((query) => this.search(query));
   }
