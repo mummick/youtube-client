@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { OptionsService } from 'src/app/core/services/options.service';
 import { SortParams } from '../../models/sort-params.model';
 import { VideoListData } from '../../models/video-list-data.model';
@@ -14,13 +15,9 @@ import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange
 export class MainPageComponent implements OnInit, OnDestroy {
   private paramsSubscription?: Subscription;
 
-  private searchSubscription?: Subscription;
-
   private optionsSubscription?: Subscription;
 
   public isFilter = false;
-
-  private videoListData$?: Observable<VideoListData>;
 
   public videoListData?: VideoListData;
 
@@ -35,15 +32,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.paramsSubscription = this.route.params.subscribe((params) => {
-      this.videoListData$ = this.search(params.query);
-      if (this.videoListData$) {
-        this.searchSubscription?.unsubscribe();
-        this.searchSubscription = this.videoListData$.subscribe((videoListData) =>
-          this.setVideoListData(videoListData),
-        );
-      }
-    });
+    this.paramsSubscription = this.route.params
+      .pipe(switchMap((params) => this.search(params.query)))
+      .subscribe((videoListData) => {
+        this.videoListData = videoListData;
+      });
     this.optionsSubscription = this.optionsService.isFilter$.subscribe((isFilter) => {
       this.toggleFilter(isFilter);
     });
@@ -51,7 +44,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.paramsSubscription?.unsubscribe();
-    this.searchSubscription?.unsubscribe();
     this.optionsSubscription?.unsubscribe();
   }
 
@@ -63,12 +55,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  setVideoListData(videoListData: VideoListData) {
-    this.videoListData = videoListData;
-  }
-
-  private search(query: string | null) {
-    return query !== null ? this.youtubeDataExchange.getVideoItems(query) : undefined;
+  private search(query: string) {
+    return this.youtubeDataExchange.getVideoItems(query);
   }
 
   filterByNameChange(filter: string) {
