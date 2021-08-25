@@ -1,32 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { User } from '../../shared/models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
-  private isLoggedIn = new BehaviorSubject(this.isAuthorised());
+  private user = new BehaviorSubject<User | null>(this.getUser());
 
-  public isLoggedIn$ = this.isLoggedIn.asObservable();
-
-  private userName = new BehaviorSubject<string | undefined>(this.getUserName());
-
-  public userName$ = this.userName.asObservable();
+  public user$ = this.user.asObservable();
 
   /* eslint-disable-next-line */
-  login(user: string, password: string): boolean {
-    localStorage.setItem('user', user);
+  login(userName: string, password: string): boolean {
+    localStorage.setItem('userName', userName);
     localStorage.setItem('token', String(Math.ceil(Math.random() * 100)));
-    this.isLoggedIn.next(true);
-    this.userName.next(user);
+    this.user.next({ name: userName });
     return true;
   }
 
   logout(): boolean {
-    localStorage.removeItem('user');
+    localStorage.removeItem('userName');
     localStorage.removeItem('token');
-    this.isLoggedIn.next(false);
-    this.userName.next(undefined);
+    this.user.next(null);
     return true;
   }
 
@@ -34,8 +29,9 @@ export class AuthServiceService {
     return localStorage.getItem('token') !== null;
   }
 
-  getUserName(): string | undefined {
-    const user = localStorage.getItem('user');
-    return user !== null ? user : undefined;
+  getUser(): User | null {
+    if (!this.isAuthorised()) return null;
+    const userName = localStorage.getItem('userName');
+    return { name: userName !== null ? userName : '' };
   }
 }

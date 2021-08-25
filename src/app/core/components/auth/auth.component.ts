@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthServiceService } from 'src/app/auth/services/auth-service.service';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-auth',
@@ -9,28 +10,20 @@ import { AuthServiceService } from 'src/app/auth/services/auth-service.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit, OnDestroy {
-  private loginSubscription?: Subscription;
+  private userSubscription?: Subscription;
 
-  private userNameSubscription?: Subscription;
-
-  public isLoggedIn = false;
-
-  public userName?: string;
+  public user: User | null = null;
 
   constructor(public authService: AuthServiceService, private router: Router) {}
 
   ngOnInit() {
-    this.loginSubscription = this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
-      this.isLoggedIn = isLoggedIn;
-    });
-    this.userNameSubscription = this.authService.userName$.subscribe((userName) => {
-      this.userName = userName;
+    this.userSubscription = this.authService.user$.subscribe((user) => {
+      this.user = user;
     });
   }
 
   ngOnDestroy() {
-    this.loginSubscription?.unsubscribe();
-    this.userNameSubscription?.unsubscribe();
+    this.userSubscription?.unsubscribe();
   }
 
   onLoginClick() {
