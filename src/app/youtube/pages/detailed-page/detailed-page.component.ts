@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { VideoItemData } from '../../models/video-item-data.model';
 import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange.service';
 
@@ -9,7 +11,9 @@ import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange
   templateUrl: './detailed-page.component.html',
   styleUrls: ['./detailed-page.component.scss'],
 })
-export class DetailedPageComponent implements OnInit {
+export class DetailedPageComponent implements OnInit, OnDestroy {
+  private paramsSubscription?: Subscription;
+
   public videoItemData?: VideoItemData;
 
   public publishedAt?: Date;
@@ -22,19 +26,20 @@ export class DetailedPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.videoItemData = this.search(params.id);
-      if (!this.videoItemData) {
-        this.router.navigate(['/404']);
-      }
-      this.publishedAt = this.videoItemData?.snippet.publishedAt
-        ? new Date(this.videoItemData?.snippet.publishedAt)
-        : undefined;
-    });
+    this.paramsSubscription = this.route.params
+      .pipe(switchMap((params) => this.search(params.id)))
+      .subscribe((videoItemData) => {
+        this.publishedAt = new Date(videoItemData.snippet.publishedAt);
+        this.videoItemData = videoItemData;
+      });
   }
 
-  private search(id: string | null) {
-    return id ? this.youtubeDataExchange.getVideoItem(id) : undefined;
+  ngOnDestroy() {
+    this.paramsSubscription?.unsubscribe();
+  }
+
+  private search(id: string) {
+    return this.youtubeDataExchange.getVideoItem(id);
   }
 
   goBack() {

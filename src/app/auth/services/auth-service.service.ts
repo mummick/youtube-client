@@ -1,32 +1,37 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { User } from '../../shared/models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
-  public userName?: string;
+  private user = new BehaviorSubject<User | null>(this.getUser());
 
-  constructor() {
-    const user = localStorage.getItem('user');
-    this.userName = user !== null ? user : undefined;
-  }
+  public user$ = this.user.asObservable();
 
   /* eslint-disable-next-line */
-  login(user: string, password: string): boolean {
-    localStorage.setItem('user', user);
+  login(userName: string, password: string): boolean {
+    localStorage.setItem('userName', userName);
     localStorage.setItem('token', String(Math.ceil(Math.random() * 100)));
-    this.userName = user;
+    this.user.next({ name: userName });
     return true;
   }
 
   logout(): boolean {
-    localStorage.removeItem('user');
+    localStorage.removeItem('userName');
     localStorage.removeItem('token');
-    this.userName = undefined;
+    this.user.next(null);
     return true;
   }
 
   isAuthorised(): boolean {
     return localStorage.getItem('token') !== null;
+  }
+
+  getUser(): User | null {
+    if (!this.isAuthorised()) return null;
+    const userName = localStorage.getItem('userName');
+    return { name: userName !== null ? userName : '' };
   }
 }
