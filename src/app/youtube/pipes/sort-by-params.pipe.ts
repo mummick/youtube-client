@@ -10,7 +10,10 @@ import { VideoItemData } from '../models/video-item-data.model';
 export class SortByParamsPipe implements PipeTransform {
   private compare(sortType: SortType, a: VideoItemData, b: VideoItemData): number {
     if (sortType === SortType.views) {
-      return +a.statistics.viewCount - +b.statistics.viewCount;
+      if (a.statistics && b.statistics) {
+        return +a.statistics.viewCount - +b.statistics.viewCount;
+      }
+      return 0;
     }
     if (sortType === SortType.date) {
       return Date.parse(a.snippet.publishedAt) - Date.parse(b.snippet.publishedAt);

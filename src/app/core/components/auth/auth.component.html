@@ -1,5 +1,5 @@
 <div class="auth" (click)="onLoginClick()">
-  <div class="auth__name" *ngIf="authService.userName; else login">{{ authService.userName }}</div>
+  <div class="auth__name" *ngIf="user; else login">{{ user.name }}</div>
   <ng-template #login>
     <div class="auth__name">Login</div>
   </ng-template>

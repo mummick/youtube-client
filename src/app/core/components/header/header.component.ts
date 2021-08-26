@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 import { OptionsService } from '../../services/options.service';
 
 @Component({
@@ -7,16 +9,36 @@ import { OptionsService } from '../../services/options.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
-  public searchInput: string = '';
+export class HeaderComponent implements OnInit, OnDestroy {
+  private querySubscription?: Subscription;
+
+  private query = new Subject<string>();
+
+  private queryOutput$!: Observable<string>;
 
   constructor(private optionsService: OptionsService, private router: Router) {}
+
+  ngOnInit() {
+    this.queryOutput$ = this.query.pipe(
+      debounceTime(1000),
+      filter((query) => query.length >= 3),
+    );
+    this.querySubscription = this.queryOutput$.subscribe((query) => this.search(query));
+  }
+
+  ngOnDestroy() {
+    this.querySubscription?.unsubscribe();
+  }
 
   toggleFilter() {
     this.optionsService.toggleFilter();
   }
 
-  search() {
-    this.router.navigate(['/youtube/search', this.searchInput]);
+  onInputChange(query: string) {
+    this.query.next(query);
+  }
+
+  search(query: string) {
+    this.router.navigate(['/youtube/search', query]);
   }
 }

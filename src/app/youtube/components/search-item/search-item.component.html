@@ -6,7 +6,11 @@
   <mat-card-content>
     <img
       class="search-item__preview"
-      [src]="videoItemData.snippet.thumbnails.medium.url"
+      [src]="
+        videoItemData.snippet.thumbnails.medium
+          ? videoItemData.snippet.thumbnails.medium.url
+          : videoItemData.snippet.thumbnails.default?.url
+      "
       [alt]="videoItemData.snippet.title"
     />
     <app-stat-view [statistics]="videoItemData.statistics"></app-stat-view>

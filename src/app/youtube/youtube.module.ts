@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FilterComponent } from './components/filter/filter.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { SearchListComponent } from './components/search-list/search-list.component';
@@ -12,6 +13,7 @@ import { BorderColorByDateDirective } from './directives/border-color-by-date.di
 import { StatViewComponent } from './components/stat-view/stat-view.component';
 import { DetailedPageComponent } from './pages/detailed-page/detailed-page.component';
 import { YoutubeRoutingModule } from './youtube-routing.module';
+import { QueriesInterceptor } from './interceptors/queries.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,14 @@ import { YoutubeRoutingModule } from './youtube-routing.module';
     StatViewComponent,
     DetailedPageComponent,
   ],
-  imports: [CommonModule, FormsModule, SharedModule, YoutubeRoutingModule],
+  imports: [CommonModule, FormsModule, SharedModule, YoutubeRoutingModule, HttpClientModule],
   exports: [MainPageComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: QueriesInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class YoutubeModule {}
