@@ -1,4 +1,7 @@
 <div *ngIf="stateVideoList" class="search-list">
+  <div *ngFor="let item of stateCustomList">
+    <app-custom-item [stateCustomItem]="item"></app-custom-item>
+  </div>
   <div
     *ngFor="let item of stateVideoList | sortByParams: sortByParams | filterByName: filterByName"
   >

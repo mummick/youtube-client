@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { OptionsService } from 'src/app/core/services/options.service';
 import { updateQuery } from 'src/app/redux/actions/youtube.action';
 import { AppState } from 'src/app/redux/state.models';
+import { StateCustomList } from 'src/app/shared/models/custom-card.models';
 import { StateVideoList } from 'src/app/shared/models/youtube.models';
 import { SortParams } from '../../models/sort-params.model';
 
@@ -23,6 +24,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   public stateVideoList$: Observable<StateVideoList> = of([]);
 
+  public stateCustomList$: Observable<StateCustomList> = of([]);
+
   public filterByName?: string;
 
   public sortByParams?: SortParams;
@@ -38,6 +41,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
       .pipe(switchMap((params) => of(params.query)))
       .subscribe((query) => this.store.dispatch(updateQuery({ query })));
     this.stateVideoList$ = this.store.select((state) => state.youtubeCards);
+    this.stateCustomList$ = this.store.select((state) => state.customCards);
     this.optionsSubscription = this.optionsService.isFilter$.subscribe((isFilter) => {
       this.toggleFilter(isFilter);
     });
