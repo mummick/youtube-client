@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { StateVideoList } from 'src/app/shared/models/youtube.models';
 import { SortParams } from '../../models/sort-params.model';
-import { VideoListData } from '../../models/video-list-data.model';
 
 @Component({
   selector: 'app-search-list',
@@ -8,7 +8,7 @@ import { VideoListData } from '../../models/video-list-data.model';
   styleUrls: ['./search-list.component.scss'],
 })
 export class SearchListComponent {
-  @Input() videoListData?: VideoListData;
+  @Input() stateVideoList: StateVideoList | null = null;
 
   @Input() filterByName?: string;
 

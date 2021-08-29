@@ -5,15 +5,15 @@ export interface PageInfo {
   resultsPerPage: number;
 }
 export interface VideoListData {
-  kind: string;
-  etag: string;
-  pageInfo: PageInfo;
+  // kind: string;
+  // etag: string;
+  // pageInfo: PageInfo;
   items: VideoItemData[];
 }
 
 export interface VideoListSearchData {
-  kind: string;
-  etag: string;
-  pageInfo: PageInfo;
+  // kind: string;
+  // etag: string;
+  // pageInfo: PageInfo;
   items: VideoItemSearchData[];
 }

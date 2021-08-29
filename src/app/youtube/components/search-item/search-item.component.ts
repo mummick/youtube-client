@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { VideoItemData } from '../../models/video-item-data.model';
+import { StateVideoItem } from 'src/app/shared/models/youtube.models';
 
 @Component({
   selector: 'app-search-item',
@@ -8,13 +8,13 @@ import { VideoItemData } from '../../models/video-item-data.model';
   styleUrls: ['./search-item.component.scss'],
 })
 export class SearchItemComponent {
-  @Input() videoItemData: VideoItemData | undefined;
+  @Input() stateVideoItem: StateVideoItem | undefined;
 
   constructor(private router: Router) {}
 
   getDetailedInfo() {
-    if (this.videoItemData) {
-      this.router.navigate(['/youtube/detailed', this.videoItemData.id]);
+    if (this.stateVideoItem) {
+      this.router.navigate(['/youtube/detailed', this.stateVideoItem.id]);
     }
   }
 }
