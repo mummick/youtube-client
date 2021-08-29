@@ -27,14 +27,14 @@
       color: #929292;
     }
   }
-  &__search-button {
+  &__admin-button {
     padding: 5px 25px;
     font-size: 12px;
     line-height: 14px;
     color: #ffffff;
     background-color: #2f80ed;
     border: none;
-    border-radius: 0 5px 5px 0;
+    border-radius: 5px;
     cursor: pointer;
   }
   &__options-button {

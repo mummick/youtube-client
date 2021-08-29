@@ -1,0 +1,19 @@
+<div class="create">
+  <div class="create__header">Create new card</div>
+  <form class="create__form">
+    <label for="title" class="create__label">Title</label>
+    <input [(ngModel)]="customCard.title" type="text" name="title" class="create__input" />
+    <label for="description" class="create__label">Description</label>
+    <input
+      [(ngModel)]="customCard.description"
+      type="text"
+      name="description"
+      class="create__input"
+    />
+    <label for="imgURL" class="create__label">Img URL</label>
+    <input [(ngModel)]="customCard.imgURL" type="text" name="imgURL" class="create__input" />
+    <label for="videoURL" class="create__label">Link video</label>
+    <input [(ngModel)]="customCard.videoURL" type="text" name="videoURL" class="create__input" />
+    <button type="button" class="create__button" (click)="createCard()">Create Card</button>
+  </form>
+</div>

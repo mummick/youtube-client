@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { OptionsService } from 'src/app/core/services/options.service';
-import { updateYoutube } from 'src/app/redux/actions/youtube.action';
+import { updateQuery } from 'src/app/redux/actions/youtube.action';
 import { AppState } from 'src/app/redux/state.models';
 import { StateVideoList } from 'src/app/shared/models/youtube.models';
 import { SortParams } from '../../models/sort-params.model';
@@ -22,8 +22,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   public isFilter = false;
 
-  // public videoListData?: VideoListData;
-
   public stateVideoList$: Observable<StateVideoList> = of([]);
 
   public filterByName?: string;
@@ -39,12 +37,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.paramsSubscription = this.route.params
-      .pipe(switchMap((params) => this.search(params.query)))
-      .subscribe((videoListData) => {
-        // this.videoListData = videoListData;
-        const stateVideoList: StateVideoList = videoListData.items;
-        this.store.dispatch(updateYoutube({ stateVideoList }));
-      });
+      .pipe(switchMap((params) => of(params.query)))
+      .subscribe((query) => this.store.dispatch(updateQuery({ query })));
     this.stateVideoList$ = this.store.select((state) => state.youtubeCards);
     this.optionsSubscription = this.optionsService.isFilter$.subscribe((isFilter) => {
       this.toggleFilter(isFilter);
@@ -62,10 +56,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
       this.filterByName = undefined;
       this.sortByParams = undefined;
     }
-  }
-
-  private search(query: string) {
-    return this.youtubeDataExchange.getVideoItems(query);
   }
 
   filterByNameChange(filter: string) {

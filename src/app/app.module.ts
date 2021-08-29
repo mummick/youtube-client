@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 import environment from 'src/environments/environment';
 import AppRoutingModule from './app-routing.module';
 import AppComponent from './app.component';
@@ -22,6 +23,7 @@ import { youtubeReducer } from './redux/reducers/youtube.reducer';
     MaterialModule,
     FormsModule,
     CoreModule,
+    ReduxModule,
     StoreModule.forRoot(
       { youtubeCards: youtubeReducer },
       {
@@ -40,7 +42,7 @@ import { youtubeReducer } from './redux/reducers/youtube.reducer';
       logOnly: environment.production, // Restrict extension to log-only mode
       autoPause: false,
     }),
-    ReduxModule,
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],
