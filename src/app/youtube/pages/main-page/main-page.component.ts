@@ -8,7 +8,6 @@ import { updateQuery } from 'src/app/redux/actions/youtube.action';
 import { AppState } from 'src/app/redux/state.models';
 import { StateVideoList } from 'src/app/shared/models/youtube.models';
 import { SortParams } from '../../models/sort-params.model';
-import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange.service';
 
 @Component({
   selector: 'app-main-page',
@@ -30,7 +29,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private youtubeDataExchange: YoutubeDataExchangeService,
     private optionsService: OptionsService,
     private store: Store<AppState>,
   ) {}

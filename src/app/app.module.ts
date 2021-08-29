@@ -13,6 +13,7 @@ import { MaterialModule } from './shared/material/material.module';
 import { CoreModule } from './core/core.module';
 import { ReduxModule } from './redux/redux.module';
 import { youtubeReducer } from './redux/reducers/youtube.reducer';
+import { customCardsReducer } from './redux/reducers/custom-card.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,7 @@ import { youtubeReducer } from './redux/reducers/youtube.reducer';
     CoreModule,
     ReduxModule,
     StoreModule.forRoot(
-      { youtubeCards: youtubeReducer },
+      { youtubeCards: youtubeReducer, customCards: customCardsReducer },
       {
         runtimeChecks: {
           strictStateImmutability: true,
