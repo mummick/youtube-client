@@ -1,0 +1,21 @@
+<mat-card
+  class="custom-item"
+  *ngIf="stateCustomItem"
+  [appBorderColorByDate]="stateCustomItem.publishedAt"
+>
+  <mat-card-content>
+    <img
+      class="custom-item__preview"
+      [src]="stateCustomItem.imgURL"
+      [alt]="stateCustomItem.title"
+    />
+    <div class="custom-item__name">{{ stateCustomItem.title }}</div>
+    <div class="custom-item__desc">{{ stateCustomItem.description }}</div>
+  </mat-card-content>
+  <mat-card-footer>
+    <button mat-raised-button color="primary" class="custom-item__button" (click)="watch()">
+      Watch video
+    </button>
+    <div class="search-item__date"></div>
+  </mat-card-footer>
+</mat-card>

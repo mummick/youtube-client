@@ -7,15 +7,15 @@ type ThumbnailType = 'default' | 'medium' | 'high' | 'standard' | 'maxres';
 export type Thumbnails = Record<ThumbnailType, Thumbnail | undefined>;
 export interface Snippet extends Annotation {
   publishedAt: string;
-  channelId: string;
+  // channelId: string;
   thumbnails: Thumbnails;
-  channelTitle: string;
-  tags: string[];
-  categoryId: string;
-  localized: Annotation;
-  liveBroadcastContent: string;
-  defaultLanguage?: string;
-  defaultAudioLanguage: string;
+  // channelTitle: string;
+  // tags: string[];
+  // categoryId: string;
+  // localized: Annotation;
+  // liveBroadcastContent: string;
+  // defaultLanguage?: string;
+  // defaultAudioLanguage: string;
 }
 export interface Statistics {
   viewCount: string;
@@ -29,19 +29,19 @@ export interface Annotation {
   description: string;
 }
 export interface VideoItemData {
-  kind: string;
-  etag: string;
+  // kind: string;
+  // etag: string;
   id: string;
   snippet: Snippet;
   statistics: Statistics;
 }
 export interface SearchId {
-  kind: string;
+  // kind: string;
   videoId: string;
 }
 export interface VideoItemSearchData {
-  kind: string;
-  etag: string;
+  // kind: string;
+  // etag: string;
   id: SearchId;
   snippet: Snippet;
 }

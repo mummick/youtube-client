@@ -1,20 +1,20 @@
 <mat-card
   class="search-item"
-  *ngIf="videoItemData"
-  [appBorderColorByDate]="videoItemData.snippet.publishedAt"
+  *ngIf="stateVideoItem"
+  [appBorderColorByDate]="stateVideoItem.snippet.publishedAt"
 >
   <mat-card-content>
     <img
       class="search-item__preview"
       [src]="
-        videoItemData.snippet.thumbnails.medium
-          ? videoItemData.snippet.thumbnails.medium.url
-          : videoItemData.snippet.thumbnails.default?.url
+        stateVideoItem.snippet.thumbnails.medium
+          ? stateVideoItem.snippet.thumbnails.medium.url
+          : stateVideoItem.snippet.thumbnails.default?.url
       "
-      [alt]="videoItemData.snippet.title"
+      [alt]="stateVideoItem.snippet.title"
     />
-    <app-stat-view [statistics]="videoItemData.statistics"></app-stat-view>
-    <div class="search-item__name">{{ videoItemData.snippet.title }}</div>
+    <app-stat-view [statistics]="stateVideoItem.statistics"></app-stat-view>
+    <div class="search-item__name">{{ stateVideoItem.snippet.title }}</div>
   </mat-card-content>
   <mat-card-footer>
     <button

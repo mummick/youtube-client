@@ -41,4 +41,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   search(query: string) {
     this.router.navigate(['/youtube/search', query]);
   }
+
+  admin() {
+    this.router.navigate(['/admin']);
+  }
 }

@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { VideoItemData } from '../models/video-item-data.model';
+import { StateVideoList } from 'src/app/shared/models/youtube.models';
 
 @Pipe({
   name: 'filterByName',
 })
 export class FilterByNamePipe implements PipeTransform {
-  transform(videoItems: VideoItemData[], substring?: string): VideoItemData[] {
+  transform(videoItems: StateVideoList, substring?: string): StateVideoList {
     if (!videoItems || !substring || substring === '') {
       return videoItems;
     }

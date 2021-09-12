@@ -14,6 +14,7 @@ import { StatViewComponent } from './components/stat-view/stat-view.component';
 import { DetailedPageComponent } from './pages/detailed-page/detailed-page.component';
 import { YoutubeRoutingModule } from './youtube-routing.module';
 import { QueriesInterceptor } from './interceptors/queries.interceptor';
+import { CustomItemComponent } from './components/custom-item/custom-item.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { QueriesInterceptor } from './interceptors/queries.interceptor';
     BorderColorByDateDirective,
     StatViewComponent,
     DetailedPageComponent,
+    CustomItemComponent,
   ],
   imports: [CommonModule, FormsModule, SharedModule, YoutubeRoutingModule, HttpClientModule],
   exports: [MainPageComponent],

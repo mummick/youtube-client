@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { OptionsService } from 'src/app/core/services/options.service';
+import { updateQuery } from 'src/app/redux/actions/youtube.action';
+import { AppState } from 'src/app/redux/state.models';
+import { StateCustomList } from 'src/app/shared/models/custom-card.models';
+import { StateVideoList } from 'src/app/shared/models/youtube.models';
 import { SortParams } from '../../models/sort-params.model';
-import { VideoListData } from '../../models/video-list-data.model';
-import { YoutubeDataExchangeService } from '../../services/youtube-data-exchange.service';
 
 @Component({
   selector: 'app-main-page',
@@ -19,7 +22,9 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   public isFilter = false;
 
-  public videoListData?: VideoListData;
+  public stateVideoList$: Observable<StateVideoList> = of([]);
+
+  public stateCustomList$: Observable<StateCustomList> = of([]);
 
   public filterByName?: string;
 
@@ -27,16 +32,16 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private youtubeDataExchange: YoutubeDataExchangeService,
     private optionsService: OptionsService,
+    private store: Store<AppState>,
   ) {}
 
   ngOnInit() {
     this.paramsSubscription = this.route.params
-      .pipe(switchMap((params) => this.search(params.query)))
-      .subscribe((videoListData) => {
-        this.videoListData = videoListData;
-      });
+      .pipe(switchMap((params) => of(params.query)))
+      .subscribe((query) => this.store.dispatch(updateQuery({ query })));
+    this.stateVideoList$ = this.store.select((state) => state.youtubeCards);
+    this.stateCustomList$ = this.store.select((state) => state.customCards);
     this.optionsSubscription = this.optionsService.isFilter$.subscribe((isFilter) => {
       this.toggleFilter(isFilter);
     });
@@ -53,10 +58,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
       this.filterByName = undefined;
       this.sortByParams = undefined;
     }
-  }
-
-  private search(query: string) {
-    return this.youtubeDataExchange.getVideoItems(query);
   }
 
   filterByNameChange(filter: string) {

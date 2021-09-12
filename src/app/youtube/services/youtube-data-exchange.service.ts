@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { AppState } from 'src/app/redux/state.models';
+import { StateVideoList } from 'src/app/shared/models/youtube.models';
 import { VideoItemData } from '../models/video-item-data.model';
 import { VideoListData, VideoListSearchData } from '../models/video-list-data.model';
 
@@ -15,15 +18,15 @@ export class YoutubeDataExchangeService {
 
   private URL_LIST_FULL = `videos?part=snippet,statistics&id=`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<AppState>) {}
 
-  /* eslint-disable-next-line */
-  getVideoItems(query: string): Observable<VideoListData> {
+  getStateVideoList(query: string): Observable<StateVideoList> {
     return this.http.get<VideoListSearchData>(`${this.URL_LIST_PRE}${query}`).pipe(
       map((result) => result.items.map((item) => item.id.videoId)),
       switchMap((result) =>
         this.http.get<VideoListData>(`${this.URL_LIST_FULL}${result.join(',')}`),
       ),
+      map((result) => result.items),
     );
   }
 
